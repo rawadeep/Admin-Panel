@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark and Light Modes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-mode">
+  <div class="container">
+    <!-- multi-level parent-child menus in a collapsible sidebar -->
+    <aside>
+        <div class="sidebar collapsed" id="sidebar">
+          <div class="sidebar-header">
+            <h3>Dashboard</h3>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-item">
+              <a href="#">Home</a>
+            </li>
+            <li class="menu-item">
+              <a href="#">Projects</a>
+              <ul class="submenu dropdown">
+                <li class="menu-item"><a href="#">All Projects</a></li>
+                <li class="menu-item"><a href="#">Add New</a></li>
+                <li class="menu-item"><a href="#">Edit</a></li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="#">Users</a>
+              <ul class="submenu dropdown">
+                <li class="menu-item"><a href="#">All Users</a></li>
+                <li class="menu-item"><a href="#">Add New</a></li>
+                <li class="menu-item"><a href="#">Edit</a></li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="#">Payments</a>
+              <ul class="submenu dropdown">
+                <li class="menu-item"><a href="#">All Payments</a></li>
+                <li class="menu-item"><a href="#">Add New</a></li>
+                <li class="menu-item"><a href="#">Edit</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <button id="toggle-sidebar">Toggle Sidebar</button>
+      
+    <header>
+      <h1>Good Morning, Nikhil!</h1>
+      <div class="toggle">
+        <label>
+        <input type="checkbox" id="toggle-theme" />
+        <div class="ball"></div>
+        <span class="label-text">Toggle Theme</span>
+        </label>
+    </div>
+    </header>
+    <main id ="main">
+      <div class="stats">
+        <div class="stat">Total Deposit: NPR 2,50,000</div>
+        <div class="stat">Total Projects: 145</div>
+        <div class="stat">Total Users: 25</div>
+        <div class="stat">Total Paid: NPR 2,50,000</div>
+      </div>
+      <div class="chart">Chart Placeholder</div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
