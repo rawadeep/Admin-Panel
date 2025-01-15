@@ -7,13 +7,40 @@
     --card-dark: #2e2e3e;
   }
   
+  /* Reset styles for body */
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: normal;
+  }
+
+  /* Reset styles for lists */
+  ul, ol, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Reset styles for links */
+  a {
+    text-decoration: none;
+    color: inherit;
+    background: none;
+  }
+
   body {
     position: absolute;
     margin: 0;
     font-family: Arial, sans-serif;
     transition: background-color 0.3s, color 0.3s;
+    width: 100%;
   }
-  
+
   body.light-mode {
     background-color: var(--background-light);
     color: var(--text-light);
@@ -28,7 +55,11 @@
     display:flex;
     padding: 20px;
   }
-  
+  main {
+    width: 100%;
+    margin-left: 20px;
+  }
+ 
   header {
     display: flex;
     justify-content: space-between;
@@ -65,12 +96,11 @@
   }
 .sidebar {
     background-color: var(--card-light);
-    padding: 20px;
-    border-radius: 8px;
     transition: background-color 0.3s;
   }
   .sidebar {
-    width: 200px;
+    width: 240px;
+    border-radius: 20px;
     transition: width 0.3s ease;
 }
 
@@ -86,10 +116,6 @@
   /* sidebar expanded and collapsed styles */
   body.sidebar {
     width: 200px;
-  }
-  .collapsed {
-    overflow:hidden;
-    width: 60px;
   }
   .toggle {
     display: flex;
@@ -175,3 +201,157 @@
     .show{
         display:block;
     }
+
+/* Logo Color change according to light vs dark mode */
+:root {
+  --svg-fill-light: #345084; /* Light mode color */
+  --svg-fill-dark: #ffffff;  /* Dark mode color */
+}
+
+body.light-mode .logo svg path {
+  fill: var(--svg-fill-light);
+}
+body.light-mode .logo-text svg path {
+  fill: var(--svg-fill-light);
+}
+
+body.dark-mode .logo svg path{
+  fill: var(--svg-fill-dark);
+}
+
+body.dark-mode .logo-text svg path{
+  fill: var(--svg-fill-dark);
+}
+
+/* logo animation */
+.sidebar .logo svg{
+  width: 60px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.sidebar.collapsed .logo svg{
+  transform:scale(0.7);
+  margin: 0;
+  padding: 0;
+}
+.sidebar .sidebar-header{
+  padding:20px 0px 40px 20px;
+  transition: padding 0.3s ease;
+}
+.sidebar.collapsed .sidebar-header{
+  padding:0px 0px 20px 0px;
+}
+
+.sidebar .logo-text svg{
+  width: 120px;
+  margin-left: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: opacity 0.5s ease;
+}
+
+.sidebar.collapsed .logo-text svg{
+  opacity: 0;
+}
+.sidebar-header{
+  display: flex;
+  align-items: center;
+  padding: 20px 0 40px 0;
+}
+
+/* Sidebar navigation styles */
+.sidebar{
+  height: calc(100vh - 40px);
+  overflow-y: scroll;
+  /* fancy scrollbar, macos style */
+  scrollbar-width: thin;
+}
+
+/* Styling the sidebar-menu */
+.sidebar-menu{
+  display:block;
+  padding: 0px 20px;
+}
+
+.multi-menu-item{
+  flex:1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu-item-details{
+  flex:1;
+  display:flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+/* change the menu item icon fill based on the theme (dark mode/light mode) */
+body.light-mode .menu-item svg path{
+  fill: var(--svg-fill-light);
+}
+body.dark-mode .menu-item svg path{
+  fill: var(--svg-fill-dark);
+}
+
+/* when sidebar is collapsed, remove the menu-text */
+.sidebar.collapsed .menu-text{
+  display: none;
+}
+/* when sidebar is collapsed, rotate the dropdown-icon 90 ccw */
+.sidebar.collapsed .dropdown-icon{
+  transform: rotate(-90deg);
+  margin-left: -8px;
+}
+.icon{
+  width: 24px;
+}
+.icon svg{
+  width: 24px;
+}
+/* make the menu items all the same height 40px */
+.menu-item{
+  height: 40px;
+  display: grid;
+  align-items: center;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+.menu-item:hover{
+  /* gradient background dark blue to slightly lighter blue */
+  background: linear-gradient(180deg, #345084 0%, #1f2f4b 100%);
+  /* inner-shadow of white with a light opacity */
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* style the submenu */
+.submenu{
+  padding-left: 20px;
+  width:100%;
+  display: none;
+}
+.submenu.show{
+  display: flex;
+  flex-basis:100%;
+  
+}
+
+.submenu-item{
+  height: 40px;
+  width: 100%;
+  flex:1;
+  display:flex;
+  align-items:center;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.submenu-item:hover{
+  background: linear-gradient(180deg, #345084 0%, #1f2f4b 100%);
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+.break{
+  flex-basis:100%;
+  height:0px;
+}
