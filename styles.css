@@ -1,10 +1,12 @@
 :root {
-    --background-light: #ffffff;
-    --background-dark: #1e1e2f;
+    --background-light: #EDEEF0;
+    --background-dark: #18202F;
     --text-light: #000000;
     --text-dark: #ffffff;
-    --card-light: #f9f9f9;
-    --card-dark: #2e2e3e;
+    --card-light: #ffffff;
+    --card-dark: #1C2537;
+    --background-dark-accent:#323A4B;
+    --background-light-accent:#F5F6F6;
   }
   
   /* Reset styles for body */
@@ -105,7 +107,6 @@
 }
 
 .sidebar.collapsed {
-    overflow: hidden;
     width: 60px;
 }
 
@@ -195,9 +196,6 @@
     transform: scale(0);
     transition: transform 0.3s;
   }
-    .dropdown{
-        display:none;
-    }
     .show{
         display:block;
     }
@@ -261,6 +259,7 @@ body.dark-mode .logo-text svg path{
 /* Sidebar navigation styles */
 .sidebar{
   height: calc(100vh - 40px);
+  overflow: visible;
   overflow-y: scroll;
   /* fancy scrollbar, macos style */
   scrollbar-width: thin;
@@ -269,21 +268,15 @@ body.dark-mode .logo-text svg path{
 /* Styling the sidebar-menu */
 .sidebar-menu{
   display:block;
-  padding: 0px 20px;
 }
 
 .multi-menu-item{
-  flex:1;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .menu-item-details{
-  flex:1;
-  display:flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
   width: 100%;
 }
 /* change the menu item icon fill based on the theme (dark mode/light mode) */
@@ -303,6 +296,9 @@ body.dark-mode .menu-item svg path{
   transform: rotate(-90deg);
   margin-left: -8px;
 }
+.sidebar.collapsed .menu-item-details{
+  padding: 0px 5px;
+}
 .icon{
   width: 24px;
 }
@@ -311,47 +307,119 @@ body.dark-mode .menu-item svg path{
 }
 /* make the menu items all the same height 40px */
 .menu-item{
-  height: 40px;
-  display: grid;
-  align-items: center;
+  display: block;
   width: 100%;
-  transition: background-color 0.3s;
 }
-.menu-item:hover{
+.menu-item-details{
+  height: 40px;
+  width: 180px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.menu-item-details:hover{
   /* gradient background dark blue to slightly lighter blue */
   background: linear-gradient(180deg, #345084 0%, #1f2f4b 100%);
   /* inner-shadow of white with a light opacity */
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
 }
 
 /* style the submenu */
 .submenu{
-  padding-left: 20px;
   width:100%;
   display: none;
 }
 .submenu.show{
-  display: flex;
-  flex-basis:100%;
-  
+  display: block;
 }
-
+.body.dark-mode .submenu{
+  background-color: var(--background-dark-accent);
+}
+.body.light-mode .submenu{
+  background-color: var(--background-light-accent);
+}
 .submenu-item{
   height: 40px;
   width: 100%;
-  flex:1;
   display:flex;
-  align-items:center;
-  padding: 0 20px;
+  align-items: center;
+  padding: 0 40px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 .submenu-item:hover{
   background: linear-gradient(180deg, #345084 0%, #1f2f4b 100%);
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.2);
 }
-
-.break{
-  flex-basis:100%;
-  height:0px;
+body.dark-mode .submenu-item:hover{
+  background: linear-gradient(0deg, #4364a2 0%, #3a588f 100%)
 }
+/* when the submenu is showing, rotate the dropdown-icon 180deg */
+.submenu.show .dropdown-icon{
+  transform: rotate(180deg);
+}
+
+/* Default icon styling */
+.menu-item .dropdown-icon {
+  transition: transform 0.3s ease; /* Smooth rotation animation */
+}
+
+/* Rotate the icon when the submenu is visible */
+.menu-item.open .dropdown-icon {
+  transform: rotate(180deg); /* Rotate the icon */
+}
+
+
+/* when menu is collapsed, open submenu in a popup */
+.menu-item{
+  position: relative;
+}
+
+.sidebar.collapsed .submenu{
+  position: absolute;
+  background-color: var(--card-light);
+  top: 40px;
+  left: 60px;
+  width: 200px;
+  z-index: 100;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.sidebar {
+  overflow: visible; /* Ensure children can overflow */
+  position: relative; /* Establish a positioning context for absolute children */
+}
+
+.sidebar.collapsed .submenu {
+  position: absolute; /* Position relative to .menu-item */
+  background-color: var(--card-light); /* Set a background */
+  top: 40px; /* Place the submenu below the parent menu item */
+  left: 60px; /* Offset from the sidebar */
+  width: 200px; /* Set the submenu width */
+  z-index: 100; /* Ensure it appears above other elements */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a shadow for visibility */
+  border-radius: 10px; /* Smooth corners */
+}
+
+.sidebar.collapsed .submenu {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar.collapsed .submenu.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sidebar.collapsed .menu-item-details{
+  width: 40px;
+  display:flex;
+  justify-content: center;
+}
+
+/*  */
